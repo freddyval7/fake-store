@@ -6,7 +6,7 @@ export async function getAllProducts() {
 }
 
 export async function getFeaturedProducts() {
-  const response = await fetch("https://fakestoreapi.com/products?limit=4");
+  const response = await fetch("https://fakestoreapi.com/products?limit=8");
   const products = await response.json();
 
   return products;
