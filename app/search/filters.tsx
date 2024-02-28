@@ -17,7 +17,7 @@ import { Settings2 } from "lucide-react";
 export default function Filters() {
   return (
     <>
-      <div className="h-screen w-1/3 hidden md:block">
+      <div className="h-screen w-1/3 max-w-[20%] hidden md:block">
         <h2 className="text-lg">FILTERS</h2>
         <Separator />
         <Accordion type="single" collapsible>
