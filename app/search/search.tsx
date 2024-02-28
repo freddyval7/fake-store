@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Filters from "./filters";
 import { Dialog } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 
 export default function Search({ products }: { products: ProductType[] }) {
   const search = useSearchParams().get("searching") || "";
