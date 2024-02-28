@@ -7,7 +7,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="container p-8 md:py-8 md:px-24">
-      <Product {...product} />
+      <Product product={product} />
     </div>
   );
 }

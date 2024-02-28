@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Star, Store } from "lucide-react";
 import Image from "next/image";
 
-export default function Product(product: ProductType) {
+export default function Product({ product }: { product: ProductType }) {
   return (
     <div className="grid md:grid-cols-2 min-h-[70dvh]">
       <div className="my-auto max-w-[50dvh] flex justify-center">

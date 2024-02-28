@@ -4,14 +4,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getAllProducts } from "./action";
+import { getFeaturedProducts } from "./action";
 import { ProductType } from "./utils";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default async function Page() {
-  const products: ProductType[] = await getAllProducts();
+  const products: ProductType[] = await getFeaturedProducts();
 
   return (
     <main className="p-5 md:px-16 md:py-8">
