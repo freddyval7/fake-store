@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import SearchBox from "./search-box";
+import CategoriesButton from "./category-button";
 
 export default function Navbar() {
   return (
@@ -9,9 +10,11 @@ export default function Navbar() {
         <span>U STORE</span>
       </Link>
       <div className="flex items-center gap-6">
+        <CategoriesButton />
         <SearchBox />
         <ShoppingCart className="cursor-pointer" />
       </div>
     </div>
   );
 }
+
