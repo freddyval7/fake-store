@@ -22,7 +22,7 @@ export default function Search({ products }: { products: ProductType[] }) {
           <div className="grid md:grid-cols-3">
             {products.map((product) => (
               <div
-                className="md:max-h-[400px] border-b-2 border-b-muted-foreground md:border-b-0 p-8 overflow-hidden text-ellipsis flex flex-col justify-between gap-4 md:gap-0 border-y-0 border-x shadow-none"
+                className="md:max-h-[400px] border-b-2 border-b-muted-foreground md:border-b-0 p-8 flex flex-col justify-between gap-4 md:gap-0 border-y-0 border-x shadow-none"
                 key={product.id}
               >
                 <div className="h-3/5">
@@ -36,7 +36,7 @@ export default function Search({ products }: { products: ProductType[] }) {
                   />
                 </div>
                 <div className="flex h-auto flex-col justify-start gap-2">
-                  <h2 className="whitespace-nowrap font-bold">{product.title}</h2>
+                  <h2 className="whitespace-nowrap truncate font-bold">{product.title}</h2>
                   <p className="text-green-700 text-lg">${product.price}</p>
                 </div>
                 <div className="w-full">
