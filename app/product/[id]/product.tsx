@@ -32,6 +32,7 @@ export default function Product({ product }: { product: ProductType }) {
     toast({
       title: "Product added to cart",
       description: "The product has been added to the cart successfully!",
+      duration: 5000,
     });
 
     if (cart) {
