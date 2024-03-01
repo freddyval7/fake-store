@@ -6,7 +6,7 @@ import Image from "next/image";
 import { HelpCircle, Trash } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ProductType } from "../utils";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -15,15 +15,24 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { Input } from "@/components/ui/input";
+import { PatternFormat } from "react-number-format";
+import { useRouter } from "next/navigation";
 
 type ProductCart = ProductType & { quantity: number };
 
 export default function Cart() {
+  const router = useRouter();
   const [cart, setCart] = useState<ProductCart[]>([]);
+  const [total, setTotal] = useState(0);
   const { toast } = useToast();
   useLayoutEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")!) ?? []);
   }, []);
+
+  useEffect(() => {
+    setTotal(+cart.reduce((acc, product) => acc + (product.price * product.quantity), 0).toFixed(2));
+  }, [cart]);
 
   function removeProduct(id: number) {
     const newCart = cart.filter((product) => product.id !== id);
@@ -55,9 +64,21 @@ export default function Cart() {
     localStorage.setItem("cart", JSON.stringify(newCart));
   }
 
+  function makePayment() {
+    toast({
+      title: "Payment successful",
+      description: "Your payment has been processed successfully, you will be redirected to the home page",
+    });
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
+    setCart([]);
+    localStorage.removeItem("cart");
+  }
+
   return (
     <Dialog>
-      <div className="grid md:grid-cols-2">
+      <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <h2 className="font-bold text-lg">Your shopping cart</h2>
           <div className="space-y-4">
@@ -132,9 +153,56 @@ export default function Cart() {
           </div>
           <Payment />
         </div>
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4 border-l pl-8">
           <h2 className="font-bold text-lg">Payment Details</h2>
-          <div className="space-y-4"></div>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-muted-foreground text-sm">
+                Name
+              </label>
+              <Input placeholder="Freddy Tomada" />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-muted-foreground text-sm">
+                Credit Card Number
+              </label>
+              <PatternFormat
+                customInput={Input}
+                format="#### #### #### ####"
+                placeholder="XXXX XXXX XXXX XXXX"
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-muted-foreground text-sm">
+                  Expiry Date
+                </label>
+                <PatternFormat
+                  customInput={Input}
+                  format="##/##"
+                  placeholder="MM/YY"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-muted-foreground text-sm">
+                  CVV
+                </label>
+                <PatternFormat
+                  customInput={Input}
+                  format="###"
+                  placeholder="XXX"
+                />
+              </div>
+            </div>
+          </div>
+          <Separator className="h-0.5 bg-muted-foreground" />
+          <div className="flex items-center justify-between">
+            <h3 className="font-bold text-lg">Total</h3>
+            <p className="font-bold text-xl">${total} USD</p>
+          </div>
+          <div className="w-full">
+            <Button onClick={makePayment} className="w-full h-12 mt-auto">Make Payment</Button>
+          </div>
         </div>
       </div>
     </Dialog>
