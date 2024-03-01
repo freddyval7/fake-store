@@ -11,14 +11,14 @@ export default function Payment() {
   const [payment, setPayment] = useState("visa");
 
   return (
-    <div>
+    <div className="space-y-8 border rounded-md bg-primary border-b-2 border-b-yellow-500 text-primary-foreground p-8">
       <h3 className="font-bold">Payment method</h3>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-around">
         <div
           onClick={() => {
             setPayment("visa");
           }}
-          className={`border-2 rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
+          className={`border-2 bg-primary-foreground rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
             payment === "visa" && "border-slate-800"
           }`}
         >
@@ -34,7 +34,7 @@ export default function Payment() {
           onClick={() => {
             setPayment("mastercard");
           }}
-          className={`border-2 rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
+          className={`border-2 bg-primary-foreground rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
             payment === "mastercard" && "border-slate-800"
           }`}
         >
@@ -50,7 +50,7 @@ export default function Payment() {
           onClick={() => {
             setPayment("paypal");
           }}
-          className={`border-2 rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
+          className={`border-2 bg-primary-foreground rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
             payment === "paypal" && "border-slate-800"
           }`}
         >
@@ -66,7 +66,7 @@ export default function Payment() {
           onClick={() => {
             setPayment("bitcoin");
           }}
-          className={`border-2 rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
+          className={`border-2 bg-primary-foreground rounded-md px-2 shadow-md cursor-pointer hover:scale-110 transition-all duration-200 ${
             payment === "bitcoin" && "border-slate-800"
           }`}
         >
