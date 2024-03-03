@@ -164,7 +164,7 @@ export default function Cart() {
           <Payment />
         </div>
         <div
-          className={`flex flex-col gap-8 border-l pl-8 ${
+          className={`flex flex-col gap-8 border-l md:pl-8 ${
             cart.length === 0 && "cursor-not-allowed opacity-50"
           }`}
         >
