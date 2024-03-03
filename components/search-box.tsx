@@ -15,7 +15,7 @@ export default function SearchBox() {
       <div className="relative flex items-center">
         <Input
           placeholder="Search your product..."
-          className="animate-in relative fade-in-40 slide-in-from-right-8 duration-500 transition-all"
+          className="animate-in relative text-primary fade-in-40 slide-in-from-right-8 duration-500 transition-all"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
