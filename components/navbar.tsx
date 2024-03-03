@@ -2,7 +2,7 @@ import { Menu, ShoppingCart, StoreIcon } from "lucide-react";
 import Link from "next/link";
 import SearchBox from "./search-box";
 import CategoriesButton from "./category-button";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 
 export default function Navbar() {
@@ -41,11 +41,12 @@ export default function Navbar() {
             </div>
             <div className="space-y-4">
               <Link
-                className="cursor-pointer flex items-center gap-4"
                 href="/cart"
               >
-                <ShoppingCart />
-                <span>Cart</span>
+                <SheetClose className="cursor-pointer flex items-center gap-4">
+                  <ShoppingCart />
+                  <span>Cart</span>
+                </SheetClose>
               </Link>
               <Separator />
             </div>
