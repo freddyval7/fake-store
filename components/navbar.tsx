@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="md:flex hidden justify-between bg-primary text-primary-foreground items-center py-4 px-16 border-b shadow-md">
         <Link className="flex items-center gap-4" href="/">
           <StoreIcon className="h-5 w-5" />
-          <span>U STORE</span>
+          <span className="font-bold">U STORE</span>
         </Link>
         <div className="flex items-center gap-6">
           <CategoriesButton />
@@ -24,7 +24,7 @@ export default function Navbar() {
       <div className="flex md:hidden justify-between bg-primary text-primary-foreground items-center py-4 px-8 border-b shadow-md">
         <Link className="flex items-center gap-4" href="/">
           <StoreIcon className="h-5 w-5" />
-          <span>U STORE</span>
+          <span className="font-bold">U STORE</span>
         </Link>
         <SheetTrigger>
           <Menu />
