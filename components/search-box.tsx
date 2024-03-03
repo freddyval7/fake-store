@@ -31,7 +31,13 @@ export default function SearchBox() {
     );
   } else {
     return (
-      <Search className="cursor-pointer" onClick={() => setIsActivated(true)} />
+      <div className="flex items-center gap-4">
+        <Search
+          className="cursor-pointer"
+          onClick={() => setIsActivated(true)}
+        />
+        <span className="md:hidden block">Search</span>
+      </div>
     );
   }
 }
