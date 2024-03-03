@@ -13,13 +13,13 @@ export default function ProductsByCategory({
 }) {
   return (
     <div className="space-y-8">
-      <h2 className="text-2xl font-bold uppercase">
+      <h2 className="text-2xl font-bold uppercase text-pretty">
         {products.length} products in the category {`"${category}"`}
       </h2>
       <div className="grid md:gap-6 md:grid-cols-3">
         {products.map((product) => (
           <div
-            className="md:max-h-[400px] p-8 flex flex-col justify-between gap-4 md:gap-0 shadow-2xl rounded-md border-2 border-x "
+            className="md:max-h-[400px] max-w-[50dvh] p-8 flex flex-col justify-between gap-4 md:gap-0 shadow-2xl rounded-md border-2 border-x "
             key={product.id}
           >
             <div className="h-3/5">

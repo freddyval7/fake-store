@@ -36,7 +36,7 @@ export default function Search({ products }: { products: ProductType[] }) {
           <div className="grid md:grid-cols-3">
             {productsFiltered.map((product) => (
               <div
-                className="md:max-h-[400px] border-b-2 border-b-muted-foreground md:border-b-0 p-8 flex flex-col justify-between gap-4 md:gap-0 border-y-0 border-x shadow-none"
+                className="md:max-h-[400px] max-w-[50dvh] border-b-2 border-b-muted-foreground md:border-b-0 p-8 flex flex-col justify-between gap-4 md:gap-0 border-y-0 border-x shadow-none"
                 key={product.id}
               >
                 <div className="h-3/5">
