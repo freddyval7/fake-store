@@ -44,9 +44,9 @@ export default function Product({ product }: { product: ProductType }) {
   }
 
   return (
-    <div className="grid md:grid-cols-2 min-h-[70dvh]">
+    <div className="grid gap-8 md:grid-cols-2 min-h-[70dvh]">
       <Dialog open={open} onOpenChange={setOpen}>
-        <div className="my-auto max-w-[50dvh] flex justify-center">
+        <div className="my-auto mx-auto max-w-[25dvh] md:max-w-[50dvh] flex justify-center">
           <Image
             priority
             className="mx-auto object-contain"
@@ -56,7 +56,7 @@ export default function Product({ product }: { product: ProductType }) {
             height={500}
           />
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between gap-4">
           <div className="space-y-8">
             <div className="flex items-center justify-between text-sm">
               <p className="capitalize text-muted-foreground">
