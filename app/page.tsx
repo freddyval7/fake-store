@@ -8,6 +8,7 @@ import monitor from "@/public/samsung-monitor.png";
 import Link from "next/link";
 import male from "@/public/male.webp";
 import female from "@/public/female.png";
+import Wishlist from "./wishlist";
 
 export default async function Page() {
   const products: ProductType[] = await getFeaturedProducts();
@@ -80,6 +81,9 @@ export default async function Page() {
       <section className="p-5 md:px-16 md:py-8">
         <h1 className="text-3xl font-bold mb-8">Featured Products</h1>
         <FeaturedProducts products={products} />
+      </section>
+      <section className="bg-gray-100 p-5 md:px-16 md:py-8">
+        <Wishlist />
       </section>
     </main>
   );
