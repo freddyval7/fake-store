@@ -17,6 +17,16 @@ export default function SearchBox() {
           placeholder="Search your product..."
           className="animate-in relative text-primary fade-in-40 slide-in-from-right-8 duration-500 transition-all"
           value={search}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setIsActivated(false);
+              setSearch("");
+              router.push(`/search?searching=${search}`);
+            }
+            if (e.key === "Escape") {
+              setIsActivated(false);
+            }
+          }}
           onChange={(e) => setSearch(e.target.value)}
         />
         <SheetClose className="block md:hidden">
@@ -31,14 +41,14 @@ export default function SearchBox() {
           />
         </SheetClose>
         <SendHorizonal
-            onClick={() => {
-              setIsActivated(false);
-              setSearch("");
-              router.push(`/search?searching=${search}`);
-            }}
-            fill="bg-primary"
-            className="absolute md:block hidden text-primary bottom-2.5 right-4 h-4 w-4 cursor-pointer"
-          />
+          onClick={() => {
+            setIsActivated(false);
+            setSearch("");
+            router.push(`/search?searching=${search}`);
+          }}
+          fill="bg-primary"
+          className="absolute md:block hidden text-primary bottom-2.5 right-4 h-4 w-4 cursor-pointer"
+        />
       </div>
     );
   } else {
