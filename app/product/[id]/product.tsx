@@ -151,7 +151,7 @@ export default function Product({ product }: { product: ProductType }) {
               </div>
             </div>
             <div className="flex flex-col gap-4 text-pretty">
-              <div className="flex items-center justify-between w-full">
+              <div className="flex justify-between w-full">
                 <h1 className="font-bold text-2xl">{product.title}</h1>
                 <TooltipProvider>
                   <Tooltip>
@@ -162,7 +162,7 @@ export default function Product({ product }: { product: ProductType }) {
                           : "Add to your wishlist"}
                       </p>
                     </TooltipContent>
-                    <TooltipTrigger>
+                    <TooltipTrigger className="self-start mt-1">
                       <Heart
                         onClick={addToWishlist}
                         className={
