@@ -9,15 +9,77 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useToast } from "@/components/ui/use-toast";
-import { ShoppingCart, Star, Store } from "lucide-react";
+import { Heart, ShoppingCart, Star, Store } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useLayoutEffect, useState } from "react";
 
 export default function Product({ product }: { product: ProductType }) {
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
+  const [isInWishList, setIsInWishList] = useState(false);
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
+
+  useLayoutEffect(() => {
+    const wishlist = localStorage.getItem(`wishlist`);
+    if (wishlist) {
+      const wishlistArray = JSON.parse(wishlist);
+      const found = wishlistArray.find(
+        (item: ProductType) => item.id === product.id
+      );
+      if (found) {
+        setIsInWishList(true);
+      }
+    }
+  }, [product.id]);
+
+  function addToWishlist() {
+    const wishlist = localStorage.getItem(`wishlist`);
+    if (isInWishList) {
+      if (!wishlist) return;
+      const wishlistArray = JSON.parse(wishlist);
+      const filteredArray = wishlistArray.filter(
+        (item: ProductType) => item.id !== product.id
+        );
+        localStorage.setItem(`wishlist`, JSON.stringify(filteredArray));
+        setIsInWishList(false);
+        toast({
+          title: "Product removed from wishlist",
+          description: "The product has been removed from the wishlist successfully!",
+          duration: 3000,
+        });
+      return;
+    };
+
+    const object = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+    };
+
+    if (wishlist) {
+      const wishlistArray = JSON.parse(wishlist);
+      wishlistArray.push(object);
+      localStorage.setItem(`wishlist`, JSON.stringify(wishlistArray));
+      setIsInWishList(true);
+    } else localStorage.setItem(`wishlist`, JSON.stringify([object]));
+
+    toast({
+      title: "Product added to wishlist",
+      description: "The product has been added to the wishlist successfully!",
+      duration: 3000,
+    });
+    router.refresh();
+  }
 
   function addProductToCart() {
     const cart = localStorage.getItem(`cart`);
@@ -70,7 +132,30 @@ export default function Product({ product }: { product: ProductType }) {
               </div>
             </div>
             <div className="flex flex-col gap-4 text-pretty">
-              <h1 className="font-bold text-2xl">{product.title}</h1>
+              <div className="flex items-center justify-between w-full">
+                <h1 className="font-bold text-2xl">{product.title}</h1>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipContent>
+                      <p className="font-bold text-sm">
+                        {isInWishList
+                          ? "This product is in your wishlist!"
+                          : "Add to your wishlist"}
+                      </p>
+                    </TooltipContent>
+                    <TooltipTrigger>
+                      <Heart
+                        onClick={addToWishlist}
+                        className={
+                          isInWishList
+                            ? "h-6 w-6 cursor-pointer hover:scale-110 transition-all duration-300 fill-primary"
+                            : "h-6 w-6 cursor-pointer hover:scale-110 transition-all duration-300 hover:fill-primary"
+                        }
+                      />
+                    </TooltipTrigger>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
               <p className="text-lg font-bold">${product.price}</p>
               <p>{product.description}</p>
             </div>
