@@ -16,7 +16,7 @@ export default async function Page() {
     <main>
       <section className="grid md:grid-cols-2 bg-homepage bg-cover bg-center p-5 md:px-16 md:py-8">
         <div className="space-y-6 flex flex-col py-20 justify-between h-full">
-          <div className="space-y-2">
+          <div className="space-y-2 text-center md:text-start">
             <h1 className="font-bold text-3xl">
               Get The New QLED Gaming Monitor
             </h1>
@@ -25,7 +25,7 @@ export default async function Page() {
               even better than it's looks
             </p>
           </div>
-          <Link href="/product/14">
+          <Link className="mx-auto md:mx-0" href="/product/14">
             <Button size={"lg"} className="rounded-full text-lg">
               View Now
             </Button>
@@ -35,8 +35,8 @@ export default async function Page() {
           <Image src={monitor} alt="Samsung Monitor" />
         </div>
       </section>
-      <section className="grid grid-cols-2 my-16">
-        <div className="bg-sky-500 flex h-[30dvh] items-center px-16 py-4 gap-10 text-white">
+      <section className="grid md:grid-cols-2 md:my-16 mb-8 md:mb-0">
+        <div className="bg-sky-500 flex h-[30dvh] items-center px-16 py-4 gap-10 text-white text-center md:text-start">
           <div className="space-y-2">
             <h2 className="text-lg">
               Find The Best Men Clothing In The World!
@@ -48,7 +48,7 @@ export default async function Page() {
               <Button className="mt-4 rounded-full">Shop Now</Button>
             </Link>
           </div>
-          <div>
+          <div className="md:block hidden">
             <Image
               className="bg-contain h-full w-full my-auto"
               src={male}
@@ -56,7 +56,7 @@ export default async function Page() {
             />
           </div>
         </div>
-        <div className="bg-pink-300 h-[30dvh] flex items-center px-16 py-4 text-white">
+        <div className="bg-pink-300 h-[30dvh] flex items-center px-16 py-4 text-white text-center md:text-start">
           <div className="space-y-2">
             <h2 className="text-lg">
               Find The Best Women Clothing In The World!
@@ -68,7 +68,7 @@ export default async function Page() {
               <Button className="rounded-full mt-4">Shop Now</Button>
             </Link>
           </div>
-          <div>
+          <div className="md:block hidden">
             <Image
               className="w-full h-full bg-contain my-auto"
               src={female}
