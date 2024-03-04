@@ -25,6 +25,7 @@ export default function Product({ product }: { product: ProductType }) {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [isInWishList, setIsInWishList] = useState(false);
+  const [isInCart, setIsInCart] = useState(false);
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
 
@@ -39,6 +40,17 @@ export default function Product({ product }: { product: ProductType }) {
         setIsInWishList(true);
       }
     }
+
+    const cart = localStorage.getItem(`cart`);
+    if (cart) {
+      const cartArray = JSON.parse(cart);
+      const found = cartArray.find(
+        (item: ProductType) => item.id === product.id
+      );
+      if (found) {
+        setIsInCart(true);
+      }
+    }
   }, [product.id]);
 
   function addToWishlist() {
@@ -48,16 +60,17 @@ export default function Product({ product }: { product: ProductType }) {
       const wishlistArray = JSON.parse(wishlist);
       const filteredArray = wishlistArray.filter(
         (item: ProductType) => item.id !== product.id
-        );
-        localStorage.setItem(`wishlist`, JSON.stringify(filteredArray));
-        setIsInWishList(false);
-        toast({
-          title: "Product removed from wishlist",
-          description: "The product has been removed from the wishlist successfully!",
-          duration: 3000,
-        });
+      );
+      localStorage.setItem(`wishlist`, JSON.stringify(filteredArray));
+      setIsInWishList(false);
+      toast({
+        title: "Product removed from wishlist",
+        description:
+          "The product has been removed from the wishlist successfully!",
+        duration: 3000,
+      });
       return;
-    };
+    }
 
     const object = {
       id: product.id,
@@ -101,8 +114,14 @@ export default function Product({ product }: { product: ProductType }) {
       const cartArray = JSON.parse(cart);
       cartArray.push(object);
       localStorage.setItem(`cart`, JSON.stringify(cartArray));
+      router.refresh();
+      setIsInCart(true);
       return;
-    } else localStorage.setItem(`cart`, JSON.stringify([object]));
+    } else {
+      localStorage.setItem(`cart`, JSON.stringify([object]));
+      setIsInCart(true);
+      router.refresh();
+    }
   }
 
   return (
@@ -184,11 +203,12 @@ export default function Product({ product }: { product: ProductType }) {
           <div className="space-y-4">
             <DialogTrigger asChild>
               <Button
+                disabled={isInCart}
                 className="uppercase font-bold text-lg w-full glex items-center gap-4 group"
                 size={"lg"}
               >
                 <ShoppingCart className="h-6 w-6 group-hover:animate-bounce" />
-                Add to Cart
+                {isInCart ? "In Cart" : "Add to Cart"}
               </Button>
             </DialogTrigger>
           </div>
